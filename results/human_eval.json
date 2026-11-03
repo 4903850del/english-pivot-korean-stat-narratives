@@ -1,0 +1,45 @@
+{
+  "n_sheet_rows": 50,
+  "n_labeled": 50,
+  "n_unlabeled_or_invalid": 0,
+  "n_evaluable": 50,
+  "n_not_a_claim": 0,
+  "agreement": 0.98,
+  "cohen_kappa": 0.9547920433996383,
+  "false_positive_auto_mismatch_human_supported": 0,
+  "false_negative_auto_match_human_unsupported": 1,
+  "unit_error_agreement": 1.0,
+  "unit_error_kappa": 1.0,
+  "missed_claims_total": 0,
+  "missed_claims_responses_with_any": 0,
+  "confusion": {
+    "auto_MATCH|human_supported": 33,
+    "auto_MATCH|human_unsupported": 1,
+    "auto_MATCH|human_unit_error": 0,
+    "auto_MISMATCH|human_supported": 0,
+    "auto_MISMATCH|human_unsupported": 3,
+    "auto_MISMATCH|human_unit_error": 13
+  },
+  "by_cell": {
+    "direct|claude-haiku-5-5": {
+      "n": 14,
+      "agreement": 1.0,
+      "kappa": 1.0
+    },
+    "direct|claude-opus-5-5": {
+      "n": 9,
+      "agreement": 1.0,
+      "kappa": 1.0
+    },
+    "pivot|claude-haiku-5-5": {
+      "n": 14,
+      "agreement": 0.9285714285714286,
+      "kappa": 0.8571428571428572
+    },
+    "pivot|claude-opus-5-5": {
+      "n": 13,
+      "agreement": 1.0,
+      "kappa": 1.0
+    }
+  }
+}

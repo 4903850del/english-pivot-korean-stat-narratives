@@ -1,0 +1,115 @@
+{
+  "_doc": "KOSIS 통계표 3종 메타. 코드는 2026-11-02 kosis.kr 통계표 화면(statHtmlContent.do 임베디드 메타 g_jsonStatInfo)에서 직접 확인. objL*는 '+'로 이어 붙여 statisticsParameterData.do 에 전달. source_citation 의 {fetch_date} 는 fetch 시각에 치환.",
+  "api_base": "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+  "tables": {
+    "pop": {
+      "orgId": "101",
+      "tblId": "DT_1B040A3",
+      "stat_name_ko": "주민등록인구현황(행정안전부)",
+      "tbl_name_ko": "행정구역(시군구)별, 성별 인구수",
+      "table_title_ko": "주민등록인구 시도별·성별 인구수(연말 기준)",
+      "kosis_path": "인구 > 주민등록인구현황",
+      "unit": "명",
+      "prdSe": "Y",
+      "startPrdDe": "2022",
+      "endPrdDe": "2024",
+      "itmIds": ["T20", "T21", "T22"],
+      "itm_names": {"T20": "총인구수", "T21": "남자인구수", "T22": "여자인구수"},
+      "objL": [
+        {"param": "objL1", "classId": "A", "classNm": "행정구역(시군구)별", "codes": [
+          {"code": "00", "name": "전국"},
+          {"code": "11", "name": "서울특별시"},
+          {"code": "26", "name": "부산광역시"},
+          {"code": "27", "name": "대구광역시"},
+          {"code": "28", "name": "인천광역시"},
+          {"code": "29", "name": "광주광역시"},
+          {"code": "30", "name": "대전광역시"},
+          {"code": "31", "name": "울산광역시"},
+          {"code": "36", "name": "세종특별자치시"},
+          {"code": "41", "name": "경기도"},
+          {"code": "51", "name": "강원특별자치도"},
+          {"code": "43", "name": "충청북도"},
+          {"code": "44", "name": "충청남도"},
+          {"code": "52", "name": "전북특별자치도"},
+          {"code": "46", "name": "전라남도"},
+          {"code": "47", "name": "경상북도"},
+          {"code": "48", "name": "경상남도"},
+          {"code": "50", "name": "제주특별자치도"}
+        ]}
+      ],
+      "layout": {"row": "C1_NM", "col": "ITM_NM", "row_header": "행정구역"},
+      "notes": "KOSIS 메타에 2026년 신설 코드 12(전남광주통합특별시)가 있으나 2022~2024 확정치가 없으므로 제외. 성별은 분류가 아니라 항목(T20/T21/T22)으로 제공됨. 연간(Y) 값은 연말(12월) 기준. 연간 수록기간 1992~2025.",
+      "source_citation": "국가데이터처, 국가통계포털(KOSIS), 주민등록인구현황(행정안전부) 행정구역(시군구)별, 성별 인구수(DT_1B040A3), 조회일 {fetch_date}"
+    },
+    "emp": {
+      "orgId": "101",
+      "tblId": "DT_1DA7012S",
+      "stat_name_ko": "경제활동인구조사",
+      "tbl_name_ko": "성/연령별 경제활동인구",
+      "table_title_ko": "경제활동인구조사 성별·연령계층별 고용률(연간)",
+      "kosis_path": "노동 > 경제활동인구조사 > 경제활동인구총괄(공식 실업률, 구직기간 4주기준, 1999.6~현재)",
+      "unit": "%",
+      "prdSe": "Y",
+      "startPrdDe": "2022",
+      "endPrdDe": "2024",
+      "itmIds": ["T90"],
+      "itm_names": {"T90": "고용률"},
+      "objL": [
+        {"param": "objL1", "classId": "B", "classNm": "성별", "codes": [
+          {"code": "0", "name": "계"},
+          {"code": "2", "name": "남자"},
+          {"code": "3", "name": "여자"}
+        ]},
+        {"param": "objL2", "classId": "G", "classNm": "연령계층별", "codes": [
+          {"code": "00", "name": "계"},
+          {"code": "10", "name": "15 - 19세"},
+          {"code": "20", "name": "20 - 29세"},
+          {"code": "30", "name": "30 - 39세"},
+          {"code": "40", "name": "40 - 49세"},
+          {"code": "50", "name": "50 - 59세"},
+          {"code": "60", "name": "60세이상"}
+        ]}
+      ],
+      "layout": {"row": "C2_NM", "col": "C1_NM", "row_header": "연령계층"},
+      "notes": "별도의 '성/연령별 고용률' 단독 표 대신, 같은 조사의 총괄표(DT_1DA7012S)에서 항목 T90(고용률, %)만 조회. 연간 수록기간 2000~2025.",
+      "source_citation": "국가데이터처, 국가통계포털(KOSIS), 경제활동인구조사 성/연령별 경제활동인구(DT_1DA7012S) 고용률 항목, 조회일 {fetch_date}"
+    },
+    "cpi": {
+      "orgId": "101",
+      "tblId": "DT_1J22001",
+      "stat_name_ko": "소비자물가조사",
+      "tbl_name_ko": "지출목적별 소비자물가지수(품목포함, 2020=100)",
+      "table_title_ko": "지출목적별 소비자물가지수(2020=100, 연간, 전국)",
+      "kosis_path": "물가 > 소비자물가조사",
+      "unit": "2020=100",
+      "prdSe": "Y",
+      "startPrdDe": "2022",
+      "endPrdDe": "2024",
+      "itmIds": ["T"],
+      "itm_names": {"T": "소비자물가지수"},
+      "objL": [
+        {"param": "objL1", "classId": "C", "classNm": "시도별", "codes": [
+          {"code": "T10", "name": "전국"}
+        ]},
+        {"param": "objL2", "classId": "I", "classNm": "지출목적별", "codes": [
+          {"code": "0", "name": "0 총지수"},
+          {"code": "A", "name": "01 식료품 및 비주류음료"},
+          {"code": "B", "name": "02 주류 및 담배"},
+          {"code": "C", "name": "03 의류 및 신발"},
+          {"code": "D", "name": "04 주택, 수도, 전기 및 연료"},
+          {"code": "E", "name": "05 가정용품 및 가사 서비스"},
+          {"code": "F", "name": "06 보건"},
+          {"code": "G", "name": "07 교통"},
+          {"code": "H", "name": "08 통신"},
+          {"code": "I", "name": "09 오락 및 문화"},
+          {"code": "J", "name": "10 교육"},
+          {"code": "K", "name": "11 음식 및 숙박"},
+          {"code": "L", "name": "12 기타 상품 및 서비스"}
+        ]}
+      ],
+      "layout": {"row": "C2_NM", "col": "ITM_NM", "row_header": "지출목적", "strip_code_prefix": true},
+      "notes": "지출목적 12대분류 + 총지수(1단계 코드)만 사용. 연간 수록기간 1965~2025. 지수는 소수 둘째 자리.",
+      "source_citation": "국가데이터처, 국가통계포털(KOSIS), 소비자물가조사 지출목적별 소비자물가지수(품목포함, 2020=100)(DT_1J22001), 조회일 {fetch_date}"
+    }
+  }
+}

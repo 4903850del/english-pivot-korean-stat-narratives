@@ -1,0 +1,51 @@
+﻿claim_id,qid,cond,model,rep,auto_verdict,auto_code,type,value,matched_gold_name,stratum
+q_pop_001|direct|claude-opus-5-5|2|06,q_pop_001,direct,claude-opus-5-5,2,MATCH,,PCT,0.8,부산 2024 증감률,direct|claude-opus-5-5|MATCH
+q_pop_001|pivot|claude-haiku-5-5|3|06,q_pop_001,pivot,claude-haiku-5-5,3,MATCH,,COUNT,12598420.0,두 도시 합계 2024,pivot|claude-haiku-5-5|MATCH
+q_emp_001|direct|claude-opus-5-5|3|03,q_emp_001,direct,claude-opus-5-5,3,MATCH,,PCT,2.8,여성 전년 대비 상대 변화율,direct|claude-opus-5-5|MATCH
+q_cpi_001|pivot|claude-haiku-5-5|2|01,q_cpi_001,pivot,claude-haiku-5-5,2,MATCH,,UNK,118.3,cell:식료품·비주류음료|지수|2023,pivot|claude-haiku-5-5|MATCH
+q_emp_001|direct|claude-opus-5-5|2|03,q_emp_001,direct,claude-opus-5-5,2,MATCH,,PCT,54.1,cell:여자|고용률|2023,direct|claude-opus-5-5|MATCH|fill
+q_emp_001|direct|claude-haiku-5-5|1|04,q_emp_001,direct,claude-haiku-5-5,1,MATCH,,PCT,54.1,cell:여자|고용률|2023,direct|claude-haiku-5-5|MATCH
+q_emp_001|direct|claude-haiku-5-5|3|08,q_emp_001,direct,claude-haiku-5-5,3,MATCH,,PCT,2.8,여성 전년 대비 상대 변화율,direct|claude-haiku-5-5|MATCH
+q_pop_001|pivot|claude-opus-5-5|1|03,q_pop_001,pivot,claude-opus-5-5,1,MATCH,,COUNT,3266598.0,cell:부산광역시|총인구|2024,pivot|claude-opus-5-5|MATCH
+q_cpi_001|pivot|claude-haiku-5-5|1|02,q_cpi_001,pivot,claude-haiku-5-5,1,MATCH,,PCT,4.1,식료품 2024 상승률,pivot|claude-haiku-5-5|MATCH|fill
+q_pop_001|pivot|claude-opus-5-5|2|06,q_pop_001,pivot,claude-opus-5-5,2,MATCH,,PCT,0.8,부산 2024 증감률,pivot|claude-opus-5-5|MATCH
+q_pop_001|direct|claude-haiku-5-5|3|05,q_pop_001,direct,claude-haiku-5-5,3,MATCH,,RATIO,2.86,서울/부산 배율 2024,direct|claude-haiku-5-5|MATCH|fill
+q_pop_001|pivot|claude-haiku-5-5|1|02,q_pop_001,pivot,claude-haiku-5-5,1,MATCH,,PCT,0.6,서울 2024 증감률,pivot|claude-haiku-5-5|MATCH|fill
+q_emp_001|direct|claude-haiku-5-5|1|03,q_emp_001,direct,claude-haiku-5-5,1,MATCH,,PP,16.2,2024 남녀 격차,direct|claude-haiku-5-5|MATCH|fill
+q_emp_001|pivot|claude-haiku-5-5|3|03,q_emp_001,pivot,claude-haiku-5-5,3,MATCH,,PCT,2.8,여성 전년 대비 상대 변화율,pivot|claude-haiku-5-5|MATCH
+q_pop_001|direct|claude-haiku-5-5|3|01,q_pop_001,direct,claude-haiku-5-5,3,MATCH,,PCT,0.6,서울 2024 증감률,direct|claude-haiku-5-5|MATCH
+q_emp_001|direct|claude-haiku-5-5|3|06,q_emp_001,direct,claude-haiku-5-5,3,MATCH,,PCT,2.77,여성 전년 대비 상대 변화율,direct|claude-haiku-5-5|MATCH|fill
+q_cpi_001|direct|claude-haiku-5-5|3|05,q_cpi_001,direct,claude-haiku-5-5,3,MATCH,,PP,9.9,2024 식료품-교통 격차,direct|claude-haiku-5-5|MATCH
+q_pop_001|direct|claude-opus-5-5|3|07,q_pop_001,direct,claude-opus-5-5,3,MISMATCH,K1,COUNT,3000000.0,,direct|claude-opus-5-5|MISMATCH
+q_emp_001|pivot|claude-haiku-5-5|1|01,q_emp_001,pivot,claude-haiku-5-5,1,MATCH,,PCT,71.8,cell:남자|고용률|2024,pivot|claude-haiku-5-5|MATCH
+q_emp_001|pivot|claude-opus-5-5|1|03,q_emp_001,pivot,claude-opus-5-5,1,MISMATCH,K4,PCT,16.2,2024 남녀 격차,pivot|claude-opus-5-5|MISMATCH
+q_emp_001|direct|claude-haiku-5-5|3|03,q_emp_001,direct,claude-haiku-5-5,3,MATCH,,UNK,54.1,cell:여자|고용률|2023,direct|claude-haiku-5-5|MATCH|fill
+q_pop_001|direct|claude-haiku-5-5|2|03,q_pop_001,direct,claude-haiku-5-5,2,MISMATCH,K2,PCT,0.5,서울 2024 증감률,direct|claude-haiku-5-5|MISMATCH
+q_cpi_001|pivot|claude-opus-5-5|3|05,q_cpi_001,pivot,claude-opus-5-5,3,MATCH,,PP,9.9,2024 식료품-교통 격차,pivot|claude-opus-5-5|MATCH|fill
+q_emp_001|direct|claude-opus-5-5|2|01,q_emp_001,direct,claude-opus-5-5,2,MATCH,,PP,16.2,2024 남녀 격차,direct|claude-opus-5-5|MATCH
+q_pop_001|pivot|claude-opus-5-5|2|03,q_pop_001,pivot,claude-opus-5-5,2,MATCH,,PCT,0.6,서울 2024 증감률,pivot|claude-opus-5-5|MATCH
+q_cpi_001|pivot|claude-haiku-5-5|2|06,q_cpi_001,pivot,claude-haiku-5-5,2,MATCH,,PP,9.9,2024 식료품-교통 격차,pivot|claude-haiku-5-5|MATCH|fill
+q_emp_001|direct|claude-haiku-5-5|1|07,q_emp_001,direct,claude-haiku-5-5,1,MATCH,,PP,0.5,남성 전년 대비 %p 변화,direct|claude-haiku-5-5|MATCH
+q_emp_001|pivot|claude-haiku-5-5|1|05,q_emp_001,pivot,claude-haiku-5-5,1,MATCH,,PP,1.5,여성 전년 대비 %p 변화,pivot|claude-haiku-5-5|MATCH|fill
+q_pop_001|pivot|claude-opus-5-5|1|02,q_pop_001,pivot,claude-opus-5-5,1,MATCH,,PCT,0.6,서울 2024 증감률,pivot|claude-opus-5-5|MATCH|fill
+q_emp_001|pivot|claude-haiku-5-5|1|02,q_emp_001,pivot,claude-haiku-5-5,1,MATCH,,PCT,55.6,cell:여자|고용률|2024,pivot|claude-haiku-5-5|MATCH
+q_pop_001|pivot|claude-haiku-5-5|2|03,q_pop_001,pivot,claude-haiku-5-5,2,MISMATCH,K6,PCT,0.6,서울 2024 증감률,pivot|claude-haiku-5-5|MISMATCH
+q_cpi_001|direct|claude-haiku-5-5|2|07,q_cpi_001,direct,claude-haiku-5-5,2,MATCH,,RANK,1.0,식료품 상승률 순위,direct|claude-haiku-5-5|MATCH
+q_pop_001|direct|claude-haiku-5-5|3|02,q_pop_001,direct,claude-haiku-5-5,3,MATCH,,COUNT,9331822.0,cell:서울특별시|총인구|2024,direct|claude-haiku-5-5|MATCH|fill
+q_emp_001|pivot|claude-opus-5-5|3|02,q_emp_001,pivot,claude-opus-5-5,3,MATCH,,PP,1.5,여성 전년 대비 %p 변화,pivot|claude-opus-5-5|MATCH|fill
+q_emp_001|pivot|claude-opus-5-5|2|05,q_emp_001,pivot,claude-opus-5-5,2,MATCH,,PP,1.5,여성 전년 대비 %p 변화,pivot|claude-opus-5-5|MATCH|fill
+q_pop_001|pivot|claude-opus-5-5|2|01,q_pop_001,pivot,claude-opus-5-5,2,MATCH,,COUNT,9386034.0,cell:서울특별시|총인구|2023,pivot|claude-opus-5-5|MATCH
+q_emp_001|pivot|claude-opus-5-5|1|01,q_emp_001,pivot,claude-opus-5-5,1,MATCH,,PCT,71.8,cell:남자|고용률|2024,pivot|claude-opus-5-5|MATCH
+q_pop_001|direct|claude-opus-5-5|3|04,q_pop_001,direct,claude-opus-5-5,3,MATCH,,COUNT,3270000.0,cell:부산광역시|총인구|2024,direct|claude-opus-5-5|MATCH|fill
+q_cpi_001|direct|claude-haiku-5-5|1|02,q_cpi_001,direct,claude-haiku-5-5,1,MISMATCH,K3,PCT,5.3,,direct|claude-haiku-5-5|MISMATCH
+q_cpi_001|direct|claude-opus-5-5|3|04,q_cpi_001,direct,claude-opus-5-5,3,MATCH,,PCT,23.1,식료품 2024 누적 상승폭,direct|claude-opus-5-5|MATCH
+q_cpi_001|pivot|claude-opus-5-5|2|01,q_cpi_001,pivot,claude-opus-5-5,2,MATCH,,UNK,118.3,cell:식료품·비주류음료|지수|2023,pivot|claude-opus-5-5|MATCH
+q_pop_001|pivot|claude-haiku-5-5|3|03,q_pop_001,pivot,claude-haiku-5-5,3,MATCH,,PCT,0.8,부산 2024 증감률,pivot|claude-haiku-5-5|MATCH|fill
+q_pop_001|pivot|claude-haiku-5-5|2|01,q_pop_001,pivot,claude-haiku-5-5,2,MATCH,,COUNT,9386034.0,cell:서울특별시|총인구|2023,pivot|claude-haiku-5-5|MATCH
+q_emp_001|direct|claude-opus-5-5|1|02,q_emp_001,direct,claude-opus-5-5,1,MATCH,,PCT,55.6,cell:여자|고용률|2024,direct|claude-opus-5-5|MATCH|fill
+q_cpi_001|direct|claude-haiku-5-5|2|05,q_cpi_001,direct,claude-haiku-5-5,2,MATCH,,PCT,1.1,교통 2024 상승률,direct|claude-haiku-5-5|MATCH|fill
+q_emp_001|pivot|claude-opus-5-5|2|02,q_emp_001,pivot,claude-opus-5-5,2,MATCH,,PP,17.2,2023 남녀 격차,pivot|claude-opus-5-5|MATCH|fill
+q_emp_001|direct|claude-opus-5-5|2|06,q_emp_001,direct,claude-opus-5-5,2,MATCH,,PCT,2.8,여성 전년 대비 상대 변화율,direct|claude-opus-5-5|MATCH|fill
+q_cpi_001|direct|claude-opus-5-5|1|01,q_cpi_001,direct,claude-opus-5-5,1,MATCH,,UNK,123.1,cell:식료품·비주류음료|지수|2024,direct|claude-opus-5-5|MATCH
+q_pop_001|direct|claude-opus-5-5|3|06,q_pop_001,direct,claude-opus-5-5,3,MATCH,,COUNT,12598420.0,두 도시 합계 2024,direct|claude-opus-5-5|MATCH|fill
+q_emp_001|direct|claude-opus-5-5|3|01,q_emp_001,direct,claude-opus-5-5,3,MATCH,,PCT,55.6,cell:여자|고용률|2024,direct|claude-opus-5-5|MATCH
