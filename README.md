@@ -1,5 +1,7 @@
 # English-pivot vs. Korean-direct: numeric faithfulness of LLM Korean statistical narratives
 
+Repository: https://github.com/4903850del/english-pivot-korean-stat-narratives
+
 Code, prompts, questions and logs for the KIIS 2026 Fall paper
 「영어 피벗 전략이 LLM의 한국어 통계 분석 서술 수치 충실도에 미치는 영향」 (차주훈, 청주대학교 데이터사이언스학과).
 
