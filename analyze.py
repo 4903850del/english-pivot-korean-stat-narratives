@@ -191,7 +191,7 @@ def analyze_contrast(num, den, kind, idx, sesoi, min_nonzero=5):
 
 
 # ---------------------------------------------------------------------------
-BOUND_LABEL = "two one-sided 95% upper bounds (max of cluster bootstrap and exact binomial), joint \u2265 90%"
+BOUND_LABEL = "two one-sided upper bounds at level ≥ 95% (max of one-sided 95% cluster bootstrap and one-sided 97.5% exact binomial), joint ≥ 90%"
 
 
 def _delta_text(d):

@@ -1,0 +1,7 @@
+﻿Strategy,Model,H%,U%,C%,H_required%,H_other%,claims/answer,N_claims,N_mismatch,H_upper95,ΔH[CI],ΔH_basis,ΔH_percentile_CI,tokens/answer,narrative_chars,gate_pass%,n_responses,format_fail,zero_claims
+Korean-direct,claude-haiku-5-5 (small),0.38,0.23,99.17,0.4,0.35,8.82,1323,5,0.88,ref.,,,2566.5,267.9,98.0,150,2,0
+Korean-direct,claude-opus-5-5 (large),0.0,0.0,100.0,0.0,0.0,9.31,1397,0,0.26,ref.,,,1737.8,297.3,100.0,150,0,0
+English-pivot,claude-haiku-5-5 (small),0.58,0.5,99.4,0.26,0.97,9.27,1391,8,1.13,"+0.20 [-0.09, +0.80]",BCa 95% CI (question-cluster bootstrap),"[-0.17, +0.66]",2450.3,282.2,97.3,150,2,0
+English-pivot,claude-opus-5-5 (large),0.34,0.34,99.76,0.0,0.73,9.69,1453,5,0.8,"+0.34 [-0.26, +0.80]*","* two one-sided 95% upper bounds (max of cluster bootstrap and exact binomial), joint ≥ 90%: [-U95(H_direct), +U95(H_pivot)]","[+0.00, +0.90]",1600.2,309.4,100.0,150,0,0
+Korean-direct,pooled,0.18,0.11,99.58,0.2,0.17,9.07,2720,5,0.43,ref.,,,2152.2,282.6,99.0,300,2,0
+English-pivot,pooled,0.46,0.42,99.58,0.13,0.84,9.48,2844,13,0.91,"+0.27 [+0.02, +0.84]",BCa 95% CI (question-cluster bootstrap),"[-0.04, +0.67]",2025.3,295.8,98.7,300,2,0

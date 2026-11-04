@@ -1,0 +1,7 @@
+﻿Strategy,Model,H%,U%,C%,claims/answer,N_claims,N_mismatch,H_upper95,ΔH[CI],tokens/answer,narrative_chars,gate_pass%,n_responses,format_fail,zero_claims
+Korean-direct,claude-haiku-5-5 (small),0.0,0.0,100.0,9.37,172,0,2.12,ref.,3738.7,327.6,,19,1,0
+Korean-direct,claude-opus-5-5 (large),0.0,0.0,100.0,8.83,159,0,2.29,ref.,2086.2,289.4,,18,0,0
+English-pivot,claude-haiku-5-5 (small),0.0,0.0,100.0,8.39,151,0,2.41,"+0.00 [-2.12, +2.41]*",3259.3,282.2,,18,0,0
+English-pivot,claude-opus-5-5 (large),0.0,0.0,100.0,8.83,159,0,2.29,"+0.00 [-2.29, +2.29]*",1984.3,296.2,,18,0,0
+Korean-direct,pooled,0.0,0.0,100.0,9.11,331,0,1.11,ref.,2934.8,309.0,,37,1,0
+English-pivot,pooled,0.0,0.0,100.0,8.61,310,0,1.18,"+0.00 [-1.11, +1.18]*",2621.8,289.2,,36,0,0

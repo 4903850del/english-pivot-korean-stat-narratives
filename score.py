@@ -15,7 +15,7 @@
   * 허용오차 tol = 0.5 × 10^-d (d=주장의 유효 소수 자릿수; 합성 표기는 해상도). approx 면 max(tol, 0.01×|gold_exact|). RANK 는 정확 일치.
   * K6(방향 오류)는 (a) 주장에 명시 부호 또는 증감 어휘가 있고, (b) 매칭된 gold 가 gold_required 의 PCT/PP 이며, (c) gold.sign ≠ 0 이고
     반대 방향일 때만 적용한다. gold_aux·COUNT·셀에는 적용하지 않는다(증감 '폭'의 추세 서술과 충돌하므로).
-  * 표시값 차이 폴백: PP(또는 UNK) 주장이 같은 타입 gold 쌍(required/aux)의 display 값 차이와 허용오차 내이면 MATCH + flag display_diff
+  * 표시값 차이 폴백(v1.5): PP(또는 UNK) 주장이 모델이 서술 절에 직접 쓴 같은 유형 수치 쌍(한쪽은 같은 문장·직전 문장)의 차이와 허용오차 내이면 MATCH + flag display_diff
     (모델이 반올림된 표시값으로 격차 변화를 계산한 경우). gold_aux 의 basis:"display" 변형 항목은 독립 항목으로 그대로 처리.
   * 선택 열 target_cells(context_cells 와 같은 스키마): 있으면 target_cells ∪ gold_required ∪ gold_aux 를 먼저 매칭하고,
     비대상 context 셀에만 맞는 주장은 MATCH + flag off_target_cell (H·C 에 불포함, n_off_target_cell 로 집계). 열이 없으면 기존과 동일.
@@ -46,7 +46,7 @@ import re
 import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from normalize import extract_claims_with_stats, parse_sections  # noqa: E402
+from normalize import extract_claims, extract_claims_with_stats, parse_sections  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 EPS = 1e-9
@@ -134,6 +134,20 @@ def is_attributed(claim: dict, row: str) -> bool:
         if txt and any(a in txt for a in aliases):
             return True
     return False
+
+
+def is_rank_predecessor(claim: dict, row: str) -> bool:
+    """순위 주장에서 'X에 이어 N위'의 X 행이면 True (v1.5). X 는 주어가 아니라 앞 순위 항목이다."""
+    if claim.get("type") != "RANK":
+        return False
+    sent, span = str(claim.get("sentence", "") or ""), str(claim.get("span", "") or "")
+    i = sent.find(span) if span else -1
+    prefix = _norm_label(sent[:i] if i >= 0 else sent)
+    j = prefix.rfind("에이어")
+    if j < 0:
+        return False
+    head = re.sub(r"\([^)]*\)$", "", prefix[:j]).rstrip("'\"’”")
+    return any(head.endswith(a) for a in row_aliases(row))
 
 
 CHANGE_WORDS = ("증감", "변화", "격차", "차이", "증가", "감소", "변동", "change", "diff", "gap", "growth")
@@ -329,6 +343,18 @@ def match_claim(claim: dict, golds: List[dict]) -> dict:
     return res
 
 
+def attach_neighbors(claims: List[dict]) -> None:
+    """표시값 차이 폴백용: 각 주장에 같은 문장·직전 문장에 쓰인 수치를 연결한다.
+    claims 는 응답 안에서 중복 제거되어 있으므로 해당 두 문장을 다시 추출해 쓴다(앞서 나온 같은 값도 피연산자로 인정)."""
+    cache = {}
+    for c in claims:
+        key = (c.get("prev_sentence") or "", c.get("sentence") or "")
+        if key not in cache:
+            cache[key] = extract_claims((key[0] + " " + key[1]).strip())
+        c["_neighbors"] = [o for o in cache[key] if not (o.get("span") == c.get("span") and o.get("value") == c.get("value"))]
+        c["_all_written"] = [o for o in claims if o is not c]
+
+
 def _match_claim_core(claim: dict, golds: List[dict]) -> dict:
     """verdict, code, matched_gold(name/kind/type), flags 반환."""
     res = {"verdict": "MISMATCH", "code": None, "matched_gold_name": None, "matched_gold_kind": None,
@@ -338,7 +364,8 @@ def _match_claim_core(claim: dict, golds: List[dict]) -> dict:
     primary = [g for g in golds if g["kind"] in ("cell", "required", "aux") and abs_criterion_ok(claim, g)]
     pool_all = [g for g in golds if g["kind"] == "pool" and abs_criterion_ok(claim, g)]
     # 귀속 요건: 비대상 행의 pool 항목은 row 라벨(별칭)이 주장 문장/직전 문장에 있어야 후보가 된다
-    pool = [g for g in pool_all if not g.get("needs_attr") or is_attributed(claim, g.get("row"))]
+    pool = [g for g in pool_all if (not g.get("needs_attr") or is_attributed(claim, g.get("row")))
+            and not (g.get("row") and is_rank_predecessor(claim, g.get("row")))]
     unattributed = [g for g in pool_all if g not in pool]
     offcells = [g for g in golds if g["kind"] == "offcell"]
     golds = primary + pool + offcells  # K4/K2 재시도에서도 비귀속 pool 항목은 제외
@@ -401,29 +428,43 @@ def _match_claim_core(claim: dict, golds: List[dict]) -> dict:
                 res["pool_unattributed"] = True
                 break
 
-    # 1b) 표시값 차이 폴백: PP 주장이 두 PCT(또는 두 PP) gold 의 display 값 차이와 일치하면 MATCH(flag display_diff)
-    dd_plan = {"PP": [("PCT", primary + pool), ("PP", primary + pool)], "UNK": [("PCT", primary + pool), ("PP", primary + pool)],
-               "COUNT": [("COUNT", primary)],  # COUNT(성비 등)는 required/aux 쌍만(대형 pool 우연 일치 방지)
-               "PT": [("INDEX", primary), ("PP", primary + pool), ("COUNT", primary)]}  # 지수(또는 성비) 포인트 격차: 셀 쌍의 차이도 허용
+    # 1b) 표시값 차이 폴백(v1.5): 모델이 서술 절에 직접 쓴 같은 유형 수치 쌍(한쪽은 같은 문장·직전 문장)의 차이와 일치하면 MATCH.
+    # 정답 값끼리의 차이는 쓰지 않는다(문장과 무관한 값의 우연 일치 방지).
+    dd_plan = {"PP": ("PCT", "PP"), "UNK": ("PCT", "PP"), "COUNT": ("COUNT", "UNK"), "PT": ("INDEX", "PT", "COUNT", "PP", "UNK")}
     if ctype in dd_plan:
-        for t, src in dd_plan[ctype]:
-            cand = [(g, _display_value(g)) for g in src if g["type"] == t and (g["kind"] != "cell" or ctype == "PT")]
-            cand = [(g, dv) for g, dv in cand if dv is not None]
+        def _signed(o):
+            sg = o.get("sign") or o.get("direction") or 1
+            return o["value"] * (-1 if sg < 0 else 1)
+        tol = 0.5 * claim["resolution"]
+        for t in dd_plan[ctype]:
+            near = [_signed(o) for o in claim.get("_neighbors", []) if o.get("type") == t]
+            anyw = [_signed(o) for o in claim.get("_all_written", []) if o.get("type") == t]
             best = None
-            tol = 0.5 * claim["resolution"]
-            for i in range(len(cand)):
-                for j in range(len(cand)):
-                    if i == j:
+            for a in near:          # 한 피연산자는 같은 문장·직전 문장, 다른 피연산자는 같은 서술 절 어디든
+                for b in near + anyw:
+                    if a == b:
                         continue
-                    err = abs(abs(v) - abs(cand[i][1] - cand[j][1]))
+                    err = abs(abs(v) - abs(a - b))
                     if err <= tol + EPS and (best is None or err < best[0]):
-                        best = (err, cand[i][0], cand[j][0])
+                        best = (err, a, b)
             if best is not None:
-                _, ga, gb = best
                 res.update(verdict="MATCH", code=None, display_diff=True, matched_gold_type=t,
-                           matched_gold_kind="display_diff", matched_gold_name=f"display_diff:{ga['name']} - {gb['name']}",
-                           note="display_diff", display_diff_kind=_ref_kind_of(ga["kind"]))
+                           matched_gold_kind="display_diff", matched_gold_name=f"display_diff:written {best[1]:g} - {best[2]:g}",
+                           note="display_diff", display_diff_kind="aux")
                 return res
+
+    # 지수 포인트 격차는 표의 두 셀 값 차이도 허용한다(셀은 표에 있는 값이므로 정답 파생값의 우연 일치 문제가 없다).
+    if ctype == "PT":
+        cand = [(g, _display_value(g)) for g in primary if g["type"] == "INDEX" and g["kind"] == "cell"]
+        cand = [(g, dv) for g, dv in cand if dv is not None]
+        tol = 0.5 * claim["resolution"]
+        for i in range(len(cand)):
+            for j in range(i + 1, len(cand)):
+                if abs(abs(v) - abs(cand[i][1] - cand[j][1])) <= tol + EPS:
+                    res.update(verdict="MATCH", code=None, display_diff=True, matched_gold_type="INDEX",
+                               matched_gold_kind="display_diff", matched_gold_name=f"display_diff:{cand[i][0]['name']} - {cand[j][0]['name']}",
+                               note="display_diff", display_diff_kind="aux")
+                    return res
 
     # 1c) 비대상 context 셀 (target_cells 가 있을 때만 존재): MATCH + flag off_target_cell
     if offcells:
@@ -491,6 +532,7 @@ def score_response(row: dict, q: dict, golds: List[dict]) -> (dict, List[dict]):
     covered = set()
     n_off = n_ddiff = n_pool = n_pool_unattr = 0
     req_n = req_mis = oth_n = oth_mis = 0
+    attach_neighbors(claims)
     for i, c in enumerate(claims, 1):
         m = match_claim(c, golds)
         et = effective_type(c, m)

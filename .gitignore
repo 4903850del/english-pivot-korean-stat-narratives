@@ -3,9 +3,7 @@ __pycache__/
 *.pyc
 data/raw/**/*.json
 results/_smoke/
-results/_interim*
 results/_cwd/
-data/questions_v2_backup.csv
 
 results/human_sheet_blank_backup.csv
 .pytest_cache/

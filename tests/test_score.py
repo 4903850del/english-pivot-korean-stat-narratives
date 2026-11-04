@@ -34,7 +34,9 @@ def _q(target=None):
 
 def _score(text, q):
     golds = score.build_gold(q)
-    return [(c["span"], score.match_claim(c, golds)) for c in extract_claims(text)]
+    claims = extract_claims(text)
+    score.attach_neighbors(claims)
+    return [(c["span"], score.match_claim(c, golds)) for c in claims]
 
 
 def test_k6_not_applied_to_aux_count_trend_sentences():
@@ -58,10 +60,13 @@ def test_k6_applied_only_to_required_pct_pp():
 
 
 def test_display_diff_fallback_for_pp_claims():
-    # exact 차이 0.129 이지만 표시값(-0.4, -0.6) 차이 0.2 → MATCH + display_diff
-    r = _score("감소 폭이 0.2%p 확대되어 인구 감소 속도가 빨라졌다.", _q())
-    m = r[0][1]
+    # exact 차이 0.129 이지만 모델이 쓴 표시값(-0.4, -0.6) 차이 0.2 → MATCH + display_diff (v1.5)
+    r = _score("증감률은 -0.4%에서 -0.6%로 감소 폭이 0.2%p 확대되어 인구 감소 속도가 빨라졌다.", _q())
+    m = r[-1][1]
     assert m["verdict"] == "MATCH" and m["display_diff"] is True and m["matched_gold_kind"] == "display_diff"
+    # 피연산자를 쓰지 않으면 정답 값끼리의 차이로는 일치 처리하지 않는다 (v1.5)
+    r = _score("감소 폭이 0.2%p 확대되어 인구 감소 속도가 빨라졌다.", _q())
+    assert r[0][1]["verdict"] == "MISMATCH" and r[0][1]["display_diff"] is False
     # 표시값 차이와도 안 맞는 값은 여전히 K2/K3
     r = _score("감소 폭이 0.5%p 확대되었다.", _q())
     assert r[0][1]["verdict"] == "MISMATCH" and r[0][1]["code"] in ("K2", "K3")
@@ -86,7 +91,7 @@ def test_off_target_counts_in_response_record():
     q = _q(CELLS[:3])
     golds = score.build_gold(q)
     row = {"qid": "t", "cond": "direct", "model": "m", "rep": 1,
-           "response": "===ANALYSIS===\nx\n===NARRATIVE===\n인천 인구는 3,021,010명이고 서울은 9,331,822명이다. 감소 폭이 0.2%p 확대되었다.\n===END==="}
+           "response": "===ANALYSIS===\nx\n===NARRATIVE===\n인천 인구는 3,021,010명이고 서울은 9,331,822명이다. 증감률은 -0.4%에서 -0.6%로 감소 폭이 0.2%p 확대되었다.\n===END==="}
     rec, cl = score.score_response(row, q, golds)
     assert rec["n_off_target_cell"] == 1 and rec["n_display_diff"] == 1 and rec["n_mismatch"] == 0 and rec["H"] == 0.0
 
@@ -356,3 +361,31 @@ def test_ref_kind_split():
     assert kinds["1위"] == ("pool", "MATCH")
     assert rec["n_req_claims"] == 3 and rec["n_req_mismatch"] == 2 and rec["n_other_claims"] == 4 and rec["n_other_mismatch"] == 0
     assert abs(rec["H_required"] - 2 / 3) < 1e-9 and rec["H_other"] == 0.0
+
+
+def test_display_diff_requires_written_operands_v15():
+    # 실제 감사 사례: 4.1 과 1.7 의 차이는 2.4 인데 2.5 로 쓴 문장은 불일치여야 한다
+    r = _score("A의 상승률은 4.1%로 B의 상승률 1.7%보다 2.5%p 높았다.", _q())
+    assert r[-1][1]["verdict"] == "MISMATCH" and r[-1][1]["display_diff"] is False
+    # 같은 쌍의 올바른 차이는 일치
+    r = _score("A의 상승률은 4.1%로 B의 상승률 1.7%보다 2.4%p 높았다.", _q())
+    assert r[-1][1]["verdict"] == "MATCH" and r[-1][1]["display_diff"] is True
+    # 음수 피연산자의 부호 반영: 1.1 과 -0.9 의 차이 2.0
+    r = _score("A는 1.1%, B는 -0.9%로 격차는 2.0%p였다.", _q())
+    assert r[-1][1]["verdict"] == "MATCH" and r[-1][1]["display_diff"] is True
+    # 직전 문장의 피연산자도 인정
+    r = _score("A는 17.3%로 1위였다. 다만 2위 B(16.6%)와의 차이는 0.7%p였다.", _q())
+    assert r[-1][1]["verdict"] == "MATCH" and r[-1][1]["display_diff"] is True
+
+
+def test_percent_point_on_count_operands_is_not_display_diff_v15():
+    # 성비(명)의 차이에 %p 를 쓰면 표시값 차이로 인정하지 않는다
+    r = _score("성비는 96.6명에서 96.3명으로 0.3%p 낮아졌다.", _q())
+    assert r[-1][1]["verdict"] == "MISMATCH" and r[-1][1]["display_diff"] is False
+
+
+def test_rank_predecessor_row_not_attributed_v15():
+    claim = {"type": "RANK", "span": "2위", "sentence": "보건은 5개 항목 중 식료품 및 비주류음료(3.9%)에 이어 2위입니다."}
+    assert score.is_rank_predecessor(claim, "식료품 및 비주류음료") is True
+    assert score.is_rank_predecessor(claim, "보건") is False
+    assert score.is_rank_predecessor(dict(claim, type="PCT"), "식료품 및 비주류음료") is False

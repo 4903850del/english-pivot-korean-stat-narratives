@@ -9,7 +9,7 @@ Code, prompts, questions and logs for the KIIS 2026 Fall paper
 - 2 × 2 matched design: language strategy (Korean-direct vs. English-pivot) × model tier (large: `claude-opus-5-5`, small: `claude-haiku-5-5`), 50 questions common to all four cells, 3 repeats per cell (600 generations).
 - Both conditions produce an `===ANALYSIS===` section followed by a Korean `===NARRATIVE===`. The two prompts differ in **one line** (the language of the analysis section). Run `diff prompts/direct.txt prompts/pivot.txt` to see it.
 - Inputs are raw KOSIS table cells only; derived values (growth %, %p gaps, ratios, ranks) are computed by the model and scored against gold values computed from the same cells.
-- Metrics: hallucination rate H, unit/digit error rate U (⊆ H), coverage C. Primary contrast: pooled Δ = H_pivot − H_direct with a question-level cluster bootstrap (ratio-of-sums, B = 10,000, BCa with percentile fallback). See `analysis_plan_v1.md` (pre-registered; hashes in `results/preregistration_hashes.txt`).
+- Metrics: hallucination rate H, unit/digit error rate U (⊆ H), coverage C. Primary contrast: pooled Δ = H_pivot − H_direct with a question-level cluster bootstrap (ratio-of-sums, B = 10,000, BCa with percentile fallback). See `analysis_plan_v1.md` (plan and prompts hashed before the main run; hashes in `results/preregistration_hashes.txt`). **The scorer was not frozen:** the question file gained `gold_pool` and the scorer was revised after the main run started, after an interim look at 73 responses, and again after two audits. The change log in v1.5 discloses this, and `results/precorrection_results.md` shows the primary contrast at each stage.
 
 ## Layout
 ```
@@ -49,5 +49,7 @@ Model calls go through `claude -p` with `--safe-mode --tools "" --setting-source
 
 ## Notes
 - `results/results.jsonl` is append-only; downstream scripts use the last `is_error=false` record per (qid, cond, model, rep).
-- `results/human_sheet.csv` labels were produced by two independent LLM graders (Claude; blind to conditions, auto verdicts and the results folder; 50/50 agreement) and reviewed by the author (auto verdicts per claim: `results/human_key.csv`), in place of the pre-registered single-author human rating (analysis plan v1.4). `results/human_eval.json` holds agreement/κ/FP/FN.
+- `results/human_sheet.csv` labels were produced by two independent LLM graders (Claude; blind to conditions, auto verdicts and the results folder; 50/50 agreement) and reviewed by the author (auto verdicts per claim: `results/human_key.csv`), in place of the pre-registered single-author human rating (analysis plan v1.4). That sample targets the v1.4 scorer and oversamples mismatches. `results/audit_unaudited_matches.csv` holds the census of 340 previously unaudited matches behind the v1.5 rule change, and `results/audit_match_sample.csv` holds the random audit of the remaining match paths. `results/archive_v1.4/` keeps the pre-change outputs. `results/human_eval.json` holds agreement/κ/FP/FN.
+- `analysis_plan_v1.1_frozen.md` matches its registered hash only after converting CRLF to LF.
+- `results/explore_noscaffold.jsonl` is a post-hoc auxiliary run (small tier, no required-value list or rounding rule, 100 generations, not audited). Rescored with the v1.5 scorer: direct 1.18% (6/508), pivot 0.59% (3/510).
 - Pilot runs (`results/pilot_results.jsonl`, `results/pilot2_results.jsonl`) are not part of the analysis.

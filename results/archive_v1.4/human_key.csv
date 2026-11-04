@@ -1,0 +1,51 @@
+﻿claim_id,qid,cond,model,rep,auto_verdict,auto_code,type,value,matched_gold_name,stratum
+pop_P2_2|pivot|claude-haiku-5-5|2|09,pop_P2_2,pivot,claude-haiku-5-5,2,MATCH,,UNK,101.1,pool[강원특별자치도]:강원특별자치도 2024년 남자/여자 비율(%),pivot|claude-haiku-5-5|MATCH
+pop_P4_3|pivot|claude-opus-5-5|1|07,pop_P4_3,pivot,claude-opus-5-5,1,MATCH,,PCT,0.8,경기도의 2022년 대비 2024년 인구 증감률(%),pivot|claude-opus-5-5|MATCH|fill
+pop_P3_3|pivot|claude-opus-5-5|1|04,pop_P3_3,pivot,claude-opus-5-5,1,MATCH,,RATIO,7.73,5개 시도 중 최대 시도 인구의 최소 시도 대비 배율(배),pivot|claude-opus-5-5|MATCH
+pop_P5_2|pivot|claude-opus-5-5|3|04,pop_P5_2,pivot,claude-opus-5-5,3,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-opus-5-5|MISMATCH
+pop_P3_3|pivot|claude-opus-5-5|3|07,pop_P3_3,pivot,claude-opus-5-5,3,MATCH,,RANK,12.0,전국 제외 17개 시도 중 강원특별자치도의 2024년 인구 순위(많은 순),pivot|claude-opus-5-5|MATCH|fill
+pop_P5_2|direct|claude-opus-5-5|3|08,pop_P5_2,direct,claude-opus-5-5,3,MATCH,,RANK,3.0,17개 시도 중 부산광역시의 2024년 전국 비중 순위(높은 순),direct|claude-opus-5-5|MATCH|fill
+pop_P1_1|direct|claude-haiku-5-5|3|06,pop_P1_1,direct,claude-haiku-5-5,3,MATCH,,PP,0.2,2024년 전년 대비 인구 증감률(%)-2023년 전년 대비 인구 증감률(%) 차이(%p),direct|claude-haiku-5-5|MATCH
+cpi_C1_3|direct|claude-haiku-5-5|2|02,cpi_C1_3,direct,claude-haiku-5-5,2,MATCH,,UNK,104.23,cell:교육|소비자물가지수|2023,direct|claude-haiku-5-5|MATCH
+emp_E2_4|pivot|claude-haiku-5-5|2|09,emp_E2_4,pivot,claude-haiku-5-5,2,MATCH,,PP,1.2,6개 연령계층 중 2024년 전년 대비 변화가 가장 큰 연령계층의 변화(%p),pivot|claude-haiku-5-5|MATCH
+pop_P3_1|direct|claude-opus-5-5|2|09,pop_P3_1,direct,claude-opus-5-5,2,MATCH,,PCT,26.7,17개 시도 중 2024년 인구가 가장 많은 시도의 전국 대비 비중(%),direct|claude-opus-5-5|MATCH
+emp_E2_4|direct|claude-haiku-5-5|3|06,emp_E2_4,direct,claude-haiku-5-5,3,MATCH,,PP,0.4,2024년 고용률의 전년 대비 변화(%p),direct|claude-haiku-5-5|MATCH
+pop_P5_2|pivot|claude-haiku-5-5|2|04,pop_P5_2,pivot,claude-haiku-5-5,2,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-haiku-5-5|MISMATCH
+emp_E4_1|pivot|claude-haiku-5-5|1|07,emp_E4_1,pivot,claude-haiku-5-5,1,MISMATCH,K3,RANK,6.0,,pivot|claude-haiku-5-5|MISMATCH
+emp_E4_1|direct|claude-haiku-5-5|1|07,emp_E4_1,direct,claude-haiku-5-5,1,MISMATCH,K3,RANK,6.0,,direct|claude-haiku-5-5|MISMATCH
+pop_P5_2|pivot|claude-opus-5-5|2|06,pop_P5_2,pivot,claude-opus-5-5,2,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-opus-5-5|MISMATCH
+emp_E5_1|direct|claude-haiku-5-5|3|10,emp_E5_1,direct,claude-haiku-5-5,3,MISMATCH,K3,RANK,6.0,,direct|claude-haiku-5-5|MISMATCH
+emp_E3_3|pivot|claude-haiku-5-5|3|04,emp_E3_3,pivot,claude-haiku-5-5,3,MATCH,,RANK,6.0,6개 연령계층 중 15 - 19세의 2024년 고용률 순위(높은 순),pivot|claude-haiku-5-5|MATCH|fill
+pop_P5_2|direct|claude-haiku-5-5|2|04,pop_P5_2,direct,claude-haiku-5-5,2,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),direct|claude-haiku-5-5|MISMATCH
+emp_E2_3|direct|claude-haiku-5-5|3|06,emp_E2_3,direct,claude-haiku-5-5,3,MATCH,,RANK,2.0,6개 연령계층 중 40 - 49세의 2024년 전년 대비 변화(%p) 순위(높은 순),direct|claude-haiku-5-5|MATCH
+cpi_C5_3|pivot|claude-haiku-5-5|1|05,cpi_C5_3,pivot,claude-haiku-5-5,1,MATCH,,PP,1.6,display_diff:pool[총지수]:총지수 2022→2023 전년 대비 증감률(%) - pool[가정용품 및 가사 서비스]:가정용품 및 가사 서비스 2023→2024 전년 대비 증감률(%),pivot|claude-haiku-5-5|MATCH
+pop_P3_2|direct|claude-opus-5-5|3|04,pop_P3_2,direct,claude-opus-5-5,3,MATCH,,COUNT,1098049.0,cell:울산광역시|총인구수|2024,direct|claude-opus-5-5|MATCH|fill
+emp_E2_2|direct|claude-opus-5-5|2|10,emp_E2_2,direct,claude-opus-5-5,2,MATCH,,PP,0.4,2024년 고용률의 전년 대비 변화(%p)-2023년 고용률의 전년 대비 변화(%p) 차이(%p),direct|claude-opus-5-5|MATCH
+pop_P4_2|direct|claude-opus-5-5|3|04,pop_P4_2,direct,claude-opus-5-5,3,MATCH,,RATIO,1.12,2024년 전라남도 인구의 충청북도 대비 배율(배),direct|claude-opus-5-5|MATCH
+pop_P5_2|direct|claude-haiku-5-5|3|04,pop_P5_2,direct,claude-haiku-5-5,3,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),direct|claude-haiku-5-5|MISMATCH
+pop_P5_2|pivot|claude-haiku-5-5|2|05,pop_P5_2,pivot,claude-haiku-5-5,2,MISMATCH,K2,PCT,6.451,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-haiku-5-5|MISMATCH
+pop_P1_4|pivot|claude-haiku-5-5|1|02,pop_P1_4,pivot,claude-haiku-5-5,1,MATCH,,COUNT,1103661.0,cell:울산광역시|총인구수|2023,pivot|claude-haiku-5-5|MATCH
+pop_P5_2|pivot|claude-opus-5-5|1|08,pop_P5_2,pivot,claude-opus-5-5,1,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-opus-5-5|MISMATCH
+pop_P4_3|pivot|claude-opus-5-5|3|05,pop_P4_3,pivot,claude-opus-5-5,3,MATCH,,PCT,0.8,경기도의 2022년 대비 2024년 인구 증감률(%),pivot|claude-opus-5-5|MATCH
+pop_P5_3|pivot|claude-haiku-5-5|1|04,pop_P5_3,pivot,claude-haiku-5-5,1,MISMATCH,K2,PCT,2.98,2022년 강원특별자치도의 전국 인구 비중(%),pivot|claude-haiku-5-5|MISMATCH
+emp_E2_4|pivot|claude-haiku-5-5|1|06,emp_E2_4,pivot,claude-haiku-5-5,1,MATCH,,PP,0.4,2024년 고용률의 전년 대비 변화(%p),pivot|claude-haiku-5-5|MATCH
+emp_E4_2|direct|claude-opus-5-5|2|07,emp_E4_2,direct,claude-opus-5-5,2,MATCH,,PCT,89.1,cell:30 - 39세|남자|2022,direct|claude-opus-5-5|MATCH
+pop_P5_1|direct|claude-haiku-5-5|2|04,pop_P5_1,direct,claude-haiku-5-5,2,MATCH,,PCT,6.45,2022년 부산광역시의 전국 인구 비중(%),direct|claude-haiku-5-5|MATCH
+emp_E2_4|direct|claude-opus-5-5|3|05,emp_E2_4,direct,claude-opus-5-5,3,MATCH,,PCT,2.2,2023년 고용률의 전년 대비 상대 변화율(%),direct|claude-opus-5-5|MATCH|fill
+pop_P5_1|direct|claude-haiku-5-5|2|05,pop_P5_1,direct,claude-haiku-5-5,2,MISMATCH,K2,PCT,6.3777,2024년 부산광역시의 전국 인구 비중(%),direct|claude-haiku-5-5|MISMATCH
+emp_E2_4|direct|claude-haiku-5-5|1|10,emp_E2_4,direct,claude-haiku-5-5,1,MATCH,,PP,0.8,6개 연령계층 중 2024년 전년 대비 변화가 가장 큰 연령계층의 변화(%p)-2024년 고용률의 전년 대비 변화(%p) 차이(%p),direct|claude-haiku-5-5|MATCH|fill
+pop_P4_2|direct|claude-haiku-5-5|3|11,pop_P4_2,direct,claude-haiku-5-5,3,MATCH,,PCT,1.8,17개 시도 중 2022년 대비 2024년 증감률이 가장 높은 시도의 증감률(%),direct|claude-haiku-5-5|MATCH
+pop_P5_1|pivot|claude-opus-5-5|2|06,pop_P5_1,pivot,claude-opus-5-5,2,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-opus-5-5|MISMATCH
+cpi_C5_2|pivot|claude-opus-5-5|2|03,cpi_C5_2,pivot,claude-opus-5-5,2,MATCH,,PCT,6.0,총지수의 2022년 대비 2024년 누적 상승률(%),pivot|claude-opus-5-5|MATCH
+pop_P4_3|pivot|claude-haiku-5-5|2|10,pop_P4_3,pivot,claude-haiku-5-5,2,MATCH,,RANK,3.0,17개 시도 중 경기도의 2022년 대비 2024년 증감률 순위(높은 순),pivot|claude-haiku-5-5|MATCH
+emp_E1_2|direct|claude-opus-5-5|1|03,emp_E1_2,direct,claude-opus-5-5,1,MATCH,,PP,17.5,"2024년 60세이상 남녀 고용률 격차(남자-여자, %p)",direct|claude-opus-5-5|MATCH
+emp_E4_1|pivot|claude-opus-5-5|1|08,emp_E4_1,pivot,claude-opus-5-5,1,MATCH,,PCT,4.9,cell:15 - 19세|남자|2024,pivot|claude-opus-5-5|MATCH
+pop_P4_1|pivot|claude-haiku-5-5|2|01,pop_P4_1,pivot,claude-haiku-5-5,2,MATCH,,RATIO,6.52,2022년 서울특별시 인구의 대전광역시 대비 배율(배),pivot|claude-haiku-5-5|MATCH|fill
+pop_P5_3|pivot|claude-haiku-5-5|2|08,pop_P5_3,pivot,claude-haiku-5-5,2,MISMATCH,K2,PCT,2.9873,2022년 강원특별자치도의 전국 인구 비중(%),pivot|claude-haiku-5-5|MISMATCH
+pop_P5_1|pivot|claude-haiku-5-5|3|05,pop_P5_1,pivot,claude-haiku-5-5,3,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-haiku-5-5|MISMATCH
+cpi_C4_2|direct|claude-haiku-5-5|3|01,cpi_C4_2,direct,claude-haiku-5-5,3,MATCH,,PCT,4.1,5개 항목 중 상승률이 가장 높은 항목의 2024년 전년 대비 상승률(%),direct|claude-haiku-5-5|MATCH|fill
+emp_E2_4|direct|claude-haiku-5-5|2|08,emp_E2_4,direct,claude-haiku-5-5,2,MATCH,,RANK,3.0,6개 연령계층 중 60세이상의 2024년 전년 대비 변화(%p) 순위(높은 순),direct|claude-haiku-5-5|MATCH|fill
+pop_P5_1|pivot|claude-opus-5-5|1|08,pop_P5_1,pivot,claude-opus-5-5,1,MISMATCH,K2,PCT,6.5,2022년 부산광역시의 전국 인구 비중(%),pivot|claude-opus-5-5|MISMATCH
+emp_E4_2|pivot|claude-opus-5-5|1|07,emp_E4_2,pivot,claude-opus-5-5,1,MATCH,,PCT,89.1,cell:30 - 39세|남자|2022,pivot|claude-opus-5-5|MATCH
+emp_E5_3|direct|claude-opus-5-5|3|10,emp_E5_3,direct,claude-opus-5-5,3,MATCH,,RANK,1.0,pool[40 - 49세]:40 - 49세 순위,direct|claude-opus-5-5|MATCH
+cpi_C3_2|pivot|claude-opus-5-5|1|06,cpi_C3_2,pivot,claude-opus-5-5,1,MATCH,,PCT,1.4,'오락 및 문화'의 2024년 전년 대비 상승률(%),pivot|claude-opus-5-5|MATCH
